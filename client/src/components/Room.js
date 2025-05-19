@@ -3,6 +3,7 @@ import "../App.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
+import Link from "react-router-dom";
 
 const Room = ({ room }) => {
   const [show, setShow] = useState(false);
@@ -21,6 +22,9 @@ const Room = ({ room }) => {
           <p>Type : {room.type}</p>
         </b>
         <div style={{ float: "right" }}>
+          <Link>
+            <button className="btn btn-primary">Book now</button>
+          </Link>
           <button className="btn btn-primary" onClick={handleShow}>
             view details
           </button>
