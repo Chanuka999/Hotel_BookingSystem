@@ -13,7 +13,7 @@ const Bookingscreen = ({ match }) => {
       try {
         setLoading(true);
         const response = await axios.post("/api/rooms/getroombyid", {
-          roomid: match.param.roomid,
+          roomid: match.params.roomid,
         });
         console.log("Rooms fetched:", response.data);
         setRoom(response.data);
@@ -27,7 +27,7 @@ const Bookingscreen = ({ match }) => {
     fetchData();
   }, []);
   return (
-    <div>
+    <div className="m-5">
       <h1>Booking scheem</h1>
       <h1>Room id - {roomid}</h1>
     </div>
