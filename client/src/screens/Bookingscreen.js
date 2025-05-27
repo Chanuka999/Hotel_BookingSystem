@@ -40,7 +40,15 @@ const Bookingscreen = () => {
           <div className="row justify-content-center mt-5 bs">
             <div className="col-md-6">
               <h1>{room.name}</h1>
-              <img src={room.imageurls[0]} className="bigimg" alt={room.name} />
+              <img
+                src={
+                  room.imageurls && room.imageurls.length > 0
+                    ? room.imageurls[0]
+                    : ""
+                }
+                className="bigimg"
+                alt={room.name}
+              />
             </div>
             <div className="col-md-6">
               <div style={{ textAlign: "right" }}>
