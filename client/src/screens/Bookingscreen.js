@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 const Bookingscreen = () => {
   const { roomid } = useParams();
@@ -34,7 +35,7 @@ const Bookingscreen = () => {
           <Loader />
         </h1>
       ) : error ? (
-        <h1>Error loading room details...</h1>
+        <Error />
       ) : room ? (
         <div>
           <div className="row justify-content-center mt-5 bs">
