@@ -34,8 +34,6 @@ const Bookingscreen = () => {
         <h1>
           <Loader />
         </h1>
-      ) : error ? (
-        <Error />
       ) : room ? (
         <div>
           <div className="row justify-content-center mt-5 bs">
@@ -74,7 +72,9 @@ const Bookingscreen = () => {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <Error />
+      )}
     </div>
   );
 };

@@ -33,8 +33,6 @@ const Homescreen = () => {
         {loading ? (
           <Loader />
         ) : rooms.length > 1 ? (
-          <Error />
-        ) : (
           rooms.map((room, index) => {
             return (
               <div className="col-md-9 mt-2" key={room._id || index}>
@@ -42,6 +40,8 @@ const Homescreen = () => {
               </div>
             );
           })
+        ) : (
+          <Error />
         )}
       </div>
     </div>

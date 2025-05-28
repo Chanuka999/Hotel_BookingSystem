@@ -11,15 +11,17 @@ const Loader = () => {
   };
 
   return (
-    <div className="sweet-loading">
-      <HashLoader
-        color="#000"
-        loading={loading}
-        cssOverride={override} // ✅ correct prop for styling
-        size={80}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+    <div className="marginTop:'150px'">
+      <div className="sweet-loading text-center">
+        <HashLoader
+          color="#000"
+          loading={loading}
+          cssOverride={override} // ✅ correct prop for styling
+          size={80}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
     </div>
   );
 };
