@@ -9,13 +9,13 @@ import Loginscreen from "./screens/Loginscreen";
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <BrowserRouter>
+        <Navbar /> {/* ✅ Now inside BrowserRouter */}
         <Routes>
-          <Route path="/home" exact Component={Homescreen} />
-          <Route path="/book/:roomid" exact Component={Bookingscreen} />
-          <Route Path="/register" exact Component={Registerscreen} />
-          <Route path="/login" exact Component={Loginscreen} />
+          <Route path="/home" element={<Homescreen />} />
+          <Route path="/book/:roomid" element={<Bookingscreen />} />
+          <Route path="/register" element={<Registerscreen />} />
+          <Route path="/login" element={<Loginscreen />} />
         </Routes>
       </BrowserRouter>
     </div>
