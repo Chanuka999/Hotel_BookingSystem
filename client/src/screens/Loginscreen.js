@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Loader from "../components/Loader";
+import Error from "../components/Error";
+import { json } from "express";
 
 function Loginscreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -19,9 +24,16 @@ function Loginscreen() {
       password,
     };
     try {
+      setLoading(true);
       const result = await axios.post("api/users/login", user).data;
+      setLoading(false);
+
+      localStorage.setItem("currentUser", json.stringify(result));
+      window.location.href = "/home";
     } catch (error) {
       console.log(error);
+      setLoading(false);
+      setError(true);
     }
   };
   return (

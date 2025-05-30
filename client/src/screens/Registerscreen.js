@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Loader from "../components/Loader";
+import Error from "../components/Error";
+import Success from "../components/Success";
 
 function Registerscreen() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+  const [success, setSuccess] = useState();
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -33,9 +40,19 @@ function Registerscreen() {
       };
 
       try {
+        setLoading(true);
         const result = await axios.post("api/users/register", user).data;
+        setLoading(false);
+        setSuccess(true);
+
+        setName("");
+        setEmail("");
+        setPassword("");
+        setCpassword("");
       } catch (error) {
         console.log(error);
+        setLoading(false);
+        setError(true);
       }
     } else {
       alert("passwords not matched");
@@ -43,7 +60,11 @@ function Registerscreen() {
   };
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
+      {loading && <Loader />}
+      {error && <Error />}
+
       <div className="col-md-6 col-lg-5">
+        {success && <Success message="registration successfull" />}
         <div className="card shadow-lg p-4 rounded-4">
           <h2 className="text-center mb-4">Register</h2>
 
