@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
-import { json } from "express";
 
 function Loginscreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -25,10 +24,11 @@ function Loginscreen() {
     };
     try {
       setLoading(true);
-      const result = await axios.post("api/users/login", user).data;
+      setError(false); // Reset error before login attempt
+      const response = await axios.post("api/users/login", user);
       setLoading(false);
 
-      localStorage.setItem("currentUser", json.stringify(result));
+      localStorage.setItem("currentUser", JSON.stringify(response.data));
       window.location.href = "/home";
     } catch (error) {
       console.log(error);
@@ -36,10 +36,13 @@ function Loginscreen() {
       setError(true);
     }
   };
+
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
+      {loading && <Loader />}
       <div className="col-md-6 col-lg-5">
         <div className="card shadow-lg p-4 rounded-4">
+          {error && <Error message="invalid credentials" />}
           <h2 className="text-center mb-4">login</h2>
 
           <div className="mb-3">
