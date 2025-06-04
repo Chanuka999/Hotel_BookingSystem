@@ -3,12 +3,17 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
+import moment from "moment";
 
 const Bookingscreen = () => {
-  const { roomid } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [room, setRoom] = useState(null);
+
+  const { roomid, fromdate: fromParam, todate: toParam } = useParams();
+  const fromdate = moment(fromParam, "DD-MM-YYYY");
+  const todate = moment(toParam, "DD-MM-YYYY");
+  const totaldays = todate.diff(fromdate, "days") + 1;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,16 +60,16 @@ const Bookingscreen = () => {
                 <hr />
                 <b>
                   <p>Name :</p>
-                  <p>From Date :</p>
-                  <p>To Date :</p>
+                  <p>From Date : {fromdate.format("DD-MM-YYYY")}</p>
+                  <p>To Date : {todate.format("DD-MM-YYYY")}</p>
                   <p>Max Count : {room.maxcount}</p>
                   <p>Amount :</p>
                 </b>
                 <hr />
                 <b>
-                  <p>Total Days :</p>
+                  <p>Total Days : {totaldays}</p>
                   <p>Rent per day : {room.rentperday}</p>
-                  <p>Total amount :</p>
+                  <p>Total amount : {totaldays * room.rentperday}</p>
                   <p>Max Count : {room.maxcount}</p>
                 </b>
                 <button className="btn btn-primary">Pay Now</button>
